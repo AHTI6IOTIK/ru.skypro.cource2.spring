@@ -1,4 +1,4 @@
-package ru.skypro.cource2.spring.collections;
+package ru.skypro.cource2.spring;
 
 import java.util.Objects;
 

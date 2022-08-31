@@ -1,8 +1,8 @@
 package ru.skypro.cource2.spring.collections.service;
 
 import org.springframework.stereotype.Service;
-import ru.skypro.cource2.spring.collections.Department;
-import ru.skypro.cource2.spring.collections.Employee;
+import ru.skypro.cource2.spring.Department;
+import ru.skypro.cource2.spring.Employee;
 
 @Service
 public class EmployeeService {

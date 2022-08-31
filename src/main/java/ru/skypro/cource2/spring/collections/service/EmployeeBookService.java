@@ -1,7 +1,7 @@
 package ru.skypro.cource2.spring.collections.service;
 
 import org.springframework.stereotype.Service;
-import ru.skypro.cource2.spring.collections.EmployeeBook;
+import ru.skypro.cource2.spring.EmployeeBook;
 
 @Service
 public class EmployeeBookService {
