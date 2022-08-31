@@ -1,4 +1,4 @@
-package ru.skypro.cource2.spring.collections.service;
+package ru.skypro.cource2.spring.service;
 
 import org.springframework.stereotype.Service;
 import ru.skypro.cource2.spring.EmployeeBook;
