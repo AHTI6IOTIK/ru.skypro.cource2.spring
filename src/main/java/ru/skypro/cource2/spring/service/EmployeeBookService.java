@@ -1,7 +1,11 @@
 package ru.skypro.cource2.spring.service;
 
 import org.springframework.stereotype.Service;
+import ru.skypro.cource2.spring.Department;
+import ru.skypro.cource2.spring.Employee;
 import ru.skypro.cource2.spring.EmployeeBook;
+
+import java.util.*;
 
 @Service
 public class EmployeeBookService {
@@ -14,6 +18,22 @@ public class EmployeeBookService {
     public EmployeeBookService(DepartmentService departmentService1, EmployeeService employeeService) {
         this.departmentService = departmentService1;
         this.employeeService = employeeService;
+    }
+
+    public Map<Department, List<Employee>> getPreparedByDepartment(List<Employee> employees) {
+        Map<Department, List<Employee>> employeeSet = new HashMap<>();
+        for (Employee employee : employees) {
+            if (!employeeSet.containsKey(employee.getDepartment())) {
+                employeeSet.put(
+                    employee.getDepartment(),
+                    new ArrayList<>()
+                );
+            }
+
+            employeeSet.get(employee.getDepartment()).add(employee);
+        }
+
+        return employeeSet;
     }
 
     public EmployeeBook createBook() {

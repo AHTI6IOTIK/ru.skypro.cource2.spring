@@ -16,9 +16,6 @@ public class Department {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o instanceof Integer) {
-            return o.equals(departmentNum);
-        }
         if (!(o instanceof Department)) return false;
         Department that = (Department) o;
         return departmentNum == that.departmentNum;
