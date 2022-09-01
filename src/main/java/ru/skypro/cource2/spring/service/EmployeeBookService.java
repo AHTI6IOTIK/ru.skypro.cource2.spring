@@ -22,18 +22,6 @@ public class EmployeeBookService {
     }
 
     public Map<Department, List<Employee>> getPreparedByDepartment(List<Employee> employees) {
-        Map<Department, List<Employee>> employeeSet = new HashMap<>();
-        for (Employee employee : employees) {
-            if (!employeeSet.containsKey(employee.getDepartment())) {
-                employeeSet.put(
-                    employee.getDepartment(),
-                    new ArrayList<>()
-                );
-            }
-
-            employeeSet.get(employee.getDepartment()).add(employee);
-        }
-
         return employees
             .stream()
             .collect(Collectors.groupingBy(Employee::getDepartment))
