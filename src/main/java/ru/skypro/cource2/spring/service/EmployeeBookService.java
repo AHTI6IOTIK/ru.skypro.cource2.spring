@@ -6,6 +6,7 @@ import ru.skypro.cource2.spring.Employee;
 import ru.skypro.cource2.spring.EmployeeBook;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeBookService {
@@ -33,7 +34,10 @@ public class EmployeeBookService {
             employeeSet.get(employee.getDepartment()).add(employee);
         }
 
-        return employeeSet;
+        return employees
+            .stream()
+            .collect(Collectors.groupingBy(Employee::getDepartment))
+        ;
     }
 
     public EmployeeBook createBook() {

@@ -142,20 +142,18 @@ public class EmployeeBook {
     }
 
     public Employee getEmployeeWithMinimumSalaryByDepartment(Integer department) {
-        List<Employee> listEmployeesByDepartment = findEmployeesByDepartmentNum(department);
-
-        return listEmployeesByDepartment
+        return employees
             .stream()
-            .max(Comparator.comparing(Employee::getSalary))
+            .filter(e -> e.getDepartment().getDepartmentNum() == department)
+            .min(Comparator.comparing(Employee::getSalary))
             .orElseThrow(() -> new NotFoundEmployeesByDepartment(department.toString()))
         ;
     }
 
     public Employee getEmployeeWithMaximumSalaryByDepartment(Integer department) {
-        List<Employee> listEmployeesByDepartment = findEmployeesByDepartmentNum(department);
-
-        return listEmployeesByDepartment
+        return employees
             .stream()
+            .filter(e -> e.getDepartment().getDepartmentNum() == department)
             .max(Comparator.comparing(Employee::getSalary))
             .orElseThrow(() -> new NotFoundEmployeesByDepartment(department.toString()))
         ;
