@@ -1,7 +1,7 @@
-package ru.skypro.cource2.spring.collections.service;
+package ru.skypro.cource2.spring.service;
 
 import org.springframework.stereotype.Service;
-import ru.skypro.cource2.spring.collections.Department;
+import ru.skypro.cource2.spring.Department;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,12 @@
-package ru.skypro.cource2.spring.collections.service;
+package ru.skypro.cource2.spring.service;
 
 import org.springframework.stereotype.Service;
-import ru.skypro.cource2.spring.collections.EmployeeBook;
+import ru.skypro.cource2.spring.Department;
+import ru.skypro.cource2.spring.Employee;
+import ru.skypro.cource2.spring.EmployeeBook;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeBookService {
@@ -14,6 +19,13 @@ public class EmployeeBookService {
     public EmployeeBookService(DepartmentService departmentService1, EmployeeService employeeService) {
         this.departmentService = departmentService1;
         this.employeeService = employeeService;
+    }
+
+    public Map<Department, List<Employee>> getPreparedByDepartment(List<Employee> employees) {
+        return employees
+            .stream()
+            .collect(Collectors.groupingBy(Employee::getDepartment))
+        ;
     }
 
     public EmployeeBook createBook() {

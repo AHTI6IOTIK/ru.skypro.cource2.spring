@@ -1,12 +1,11 @@
-package ru.skypro.cource2.spring.collections;
+package ru.skypro.cource2.spring;
 
 import ru.skypro.cource2.spring.collections.exception.EmployeeAlreadyAdded;
 import ru.skypro.cource2.spring.collections.exception.EmployeeNotFound;
+import ru.skypro.cource2.spring.stream.exception.NotFoundEmployeesByDepartment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EmployeeBook {
     private final List<Employee> employees = new ArrayList<>();
@@ -55,15 +54,11 @@ public class EmployeeBook {
     }
 
     public List<Employee> findEmployeesByDepartmentNum(Integer department) {
-        List<Employee> employeesDepartment = new ArrayList<>();
-
-        for (Employee employee : employees) {
-            if (department.equals(employee.getDepartment().getDepartmentNum())) {
-                employeesDepartment.add(employee);
-            }
-        }
-
-        return employeesDepartment;
+        return employees
+            .stream()
+            .filter(e -> e.getDepartment().getDepartmentNum() == department)
+            .collect(Collectors.toList())
+        ;
     }
 
     public Employee findEmployeeByFullName(String fullName) {
@@ -147,31 +142,21 @@ public class EmployeeBook {
     }
 
     public Employee getEmployeeWithMinimumSalaryByDepartment(Integer department) {
-        Employee minSalaryEmployee = null;
-        for (Employee employee : this.findEmployeesByDepartmentNum(department)) {
-            if (
-                null == minSalaryEmployee ||
-                minSalaryEmployee.getSalary() > employee.getSalary()
-            ) {
-                minSalaryEmployee = employee;
-            }
-        }
-
-        return minSalaryEmployee;
+        return employees
+            .stream()
+            .filter(e -> e.getDepartment().getDepartmentNum() == department)
+            .min(Comparator.comparing(Employee::getSalary))
+            .orElseThrow(() -> new NotFoundEmployeesByDepartment(department.toString()))
+        ;
     }
 
     public Employee getEmployeeWithMaximumSalaryByDepartment(Integer department) {
-        Employee maxSalaryEmployee = null;
-        for (Employee employee : this.findEmployeesByDepartmentNum(department)) {
-            if (
-                null == maxSalaryEmployee ||
-                maxSalaryEmployee.getSalary() < employee.getSalary()
-            ) {
-                maxSalaryEmployee = employee;
-            }
-        }
-
-        return maxSalaryEmployee;
+        return employees
+            .stream()
+            .filter(e -> e.getDepartment().getDepartmentNum() == department)
+            .max(Comparator.comparing(Employee::getSalary))
+            .orElseThrow(() -> new NotFoundEmployeesByDepartment(department.toString()))
+        ;
     }
 
     public double getAmountSalaryEmployeesByDepartment(Integer department) {

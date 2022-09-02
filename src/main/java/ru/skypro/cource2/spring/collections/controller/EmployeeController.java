@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.skypro.cource2.spring.collections.Employee;
-import ru.skypro.cource2.spring.collections.EmployeeBook;
-import ru.skypro.cource2.spring.collections.service.EmployeeBookService;
+import ru.skypro.cource2.spring.Employee;
+import ru.skypro.cource2.spring.EmployeeBook;
+import ru.skypro.cource2.spring.service.EmployeeBookService;
 
 import java.util.List;
 
