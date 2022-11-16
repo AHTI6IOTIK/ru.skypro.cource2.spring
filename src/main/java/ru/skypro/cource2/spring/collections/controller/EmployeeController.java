@@ -1,5 +1,6 @@
 package ru.skypro.cource2.spring.collections.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.skypro.cource2.spring.Employee;
 import ru.skypro.cource2.spring.EmployeeBook;
 import ru.skypro.cource2.spring.service.EmployeeBookService;
+import ru.skypro.cource2.spring.service.StringValidatorService;
 
 import java.util.List;
 
@@ -16,8 +18,11 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeBook employeeBook;
 
-    public EmployeeController(EmployeeBookService bookService) {
+    private final StringValidatorService stringValidatorService;
+
+    public EmployeeController(EmployeeBookService bookService, StringValidatorService stringValidatorService) {
         employeeBook = bookService.createBook();
+        this.stringValidatorService = stringValidatorService;
     }
 
     @RequestMapping
@@ -27,9 +32,9 @@ public class EmployeeController {
     }
 
     @RequestMapping("/findByName")
-    @ResponseStatus(code = HttpStatus.OK)
     public Employee findEmployeeByName(@RequestParam String fullName) {
-        return employeeBook.findEmployeeByFullName(fullName);
+        stringValidatorService.validate(fullName);
+        return employeeBook.findEmployeeByFullName(StringUtils.capitalize(fullName));
     }
 
     @RequestMapping("/findByDepartment")
